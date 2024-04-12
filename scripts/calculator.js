@@ -55,15 +55,26 @@ keypadContainer.addEventListener('click', (e) => {
                                         Number(operand1), 
                                         Number(operand2)));
     }
+    if (button.id === 'key-decimal') {
+        if (operator.length > 0 && !(operand2.includes('.'))) {
+            input.textContent += button.textContent;
+            operand2 += button.textContent;
+        } else if (!operand1.includes('.')) {
+            input.textContent += button.textContent;
+            operand1 += button.textContent;
+        }
+    }
     // Display input number and set operands
     if (button.className.includes('keypad-number')) {
-        input.textContent += e.target.textContent;
+        input.textContent += button.textContent;
         // If operator exists, set operand2 instead of operand1
         if (operator.length > 0) {
-            input.textContent = e.target.textContent;
-            operand2 += e.target.textContent
+            if (!(operand2.length > 0)) {
+                input.textContent = button.textContent;
+            }
+            operand2 += button.textContent
         } else {
-            operand1 += e.target.textContent;
+            operand1 += button.textContent;
         }
     }
     // Set operator and calculate previous operation if operator exists
@@ -77,8 +88,9 @@ keypadContainer.addEventListener('click', (e) => {
             operand2 = '';
             return;
         }
-        operator = e.target.textContent;
+        operator = button.textContent;
     }
+
 });
 
 // Reset variables and display
