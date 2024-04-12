@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body, 
+#calculator-container,
+#display-container,
+#keypad-container,
+.keypad-row {
+    display: flex;
+}
+
+body {
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#display-container {
+    width: 400px;
+    height: 100px;
+    border: 1px solid black;
+}
+
+#calculator-container {
+    flex-direction: column;
+    width: max-content;
+    gap: 1rem;
+}
+
+#keypad-container {
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.keypad-row {
+    gap: 1rem;
+}
+
+.keypad-button {
+    font-size: 1.5rem;
+    flex: 1;
+    border: 1px solid black;
+    padding: .3rem;
+}
