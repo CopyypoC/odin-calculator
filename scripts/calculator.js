@@ -34,12 +34,15 @@ function operate(operator, operand1, operand2) {
     }
 }
 
-// keypadContainer.addEventListener('click', (e) => {
-//     // Populate display
-//     input.textContent += e.target.textContent;
-//     // When operator is clicked
-// });
+keypadContainer.addEventListener('click', (e) => {
+    let button = e.target;
+    // Populate display
+    if (button.className.includes('keypad-number')) {
+        input.textContent += e.target.textContent;
+    }
+    // When operator is clicked
+});
 
-// keyClear.addEventListener('click', () => {
-//     input.textContent = '';
-// });
+keyClear.addEventListener('click', () => {
+    input.textContent = '';
+});
