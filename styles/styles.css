@@ -19,6 +19,7 @@ body {
 }
 
 #display-container {
+    flex-direction: column;
     width: 400px;
     height: 100px;
     border: 1px solid black;
@@ -49,4 +50,10 @@ body {
 
 .keypad-button:hover {
     cursor: pointer;
+}
+
+#input {
+    text-align: right;    
+    margin: auto 0;
+    font-size: 2rem;
 }
