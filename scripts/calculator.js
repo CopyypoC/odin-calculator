@@ -79,13 +79,14 @@ keypadContainer.addEventListener('click', (e) => {
     }
     // Set operator and calculate previous operation if operator exists
     if (button.className.includes('keypad-operator')) {
-        if (operator.length > 0) {
+        if (operator.length > 0 && operand2) {
             input.textContent = roundNumber(operate(operator, 
                                             Number(operand1), 
                                             Number(operand2)));
             // Use output as operand1 for next operation
             operand1 = input.textContent;
             operand2 = '';
+            operator = button.textContent;
             return;
         }
         operator = button.textContent;
