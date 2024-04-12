@@ -1,6 +1,7 @@
 const input = document.querySelector('#input');
 const keypadContainer = document.querySelector('#keypad-container');
 const keyClear = document.querySelector('#key-clear');
+const DECIMAL_PLACES = 1000000;
 let operand1 = '';
 let operand2 = '';
 let operator = '';
@@ -34,38 +35,56 @@ function operate(operator, operand1, operand2) {
     }
 }
 
+function roundNumber(num) {
+    return Math.round(num * DECIMAL_PLACES) / DECIMAL_PLACES;
+}
+
+// Keypad input handler, parses text from the display
 keypadContainer.addEventListener('click', (e) => {
     let button = e.target;
-    if (button.id === 'key-equal') {
-        input.textContent = operate(operator, Number(operand1), Number(operand2));
+    // Display final output
+    if (button.id === 'key-equal' && (operand1.length > 0) &&
+        (operand2.length > 0) && (operator.length > 0)) {
+        if (operator === '/' && operand2 === '0') {
+            let clear = new Event('click');
+            keyClear.dispatchEvent(clear);
+            alert('WHO DO YOU THINK YOU ARE?!');
+            return;
+        }
+        input.textContent = roundNumber(operate(operator, 
+                                        Number(operand1), 
+                                        Number(operand2)));
     }
-    // Populate display
+    // Display input number and set operands
     if (button.className.includes('keypad-number')) {
         input.textContent += e.target.textContent;
-        // Get operand1 from input
+        // If operator exists, set operand2 instead of operand1
         if (operator.length > 0) {
+            input.textContent = e.target.textContent;
             operand2 += e.target.textContent
         } else {
             operand1 += e.target.textContent;
         }
     }
-    // Get operator from button press
+    // Set operator and calculate previous operation if operator exists
     if (button.className.includes('keypad-operator')) {
+        if (operator.length > 0) {
+            input.textContent = roundNumber(operate(operator, 
+                                            Number(operand1), 
+                                            Number(operand2)));
+            // Use output as operand1 for next operation
+            operand1 = input.textContent;
+            operand2 = '';
+            return;
+        }
         operator = e.target.textContent;
-        input.textContent = '';
     }
-    // When operator is clicked
-
 });
 
+// Reset variables and display
 keyClear.addEventListener('click', () => {
     input.textContent = '';
     operand1 = '';
     operand2 = '';
     operator = '';
 });
-
-// Get operand2 from input
-// Wait for clear or equal button press
-// Call operate with the previous arguments
-// Display result in input
