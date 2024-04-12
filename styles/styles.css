@@ -12,23 +12,35 @@ body,
     display: flex;
 }
 
+#calculator-container,
+#display-container,
+.keypad-button {
+    border-radius: 10px;
+}
+
 body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: #111827;
+    color: white;
 }
 
 #display-container {
     flex-direction: column;
     width: 400px;
-    height: 100px;
+    min-height: 100px;
+    flex-wrap: wrap;
     border: 1px solid black;
+    background-color: #374151;
 }
 
 #calculator-container {
     flex-direction: column;
     width: max-content;
     gap: 1rem;
+    background-color: #1f2937;
+    padding: 3rem;
 }
 
 #keypad-container {
@@ -46,6 +58,8 @@ body {
     flex: 1;
     border: 1px solid black;
     padding: .3rem;
+    color: white;
+    background-color: #7d8590;
 }
 
 .keypad-button:hover {
@@ -53,7 +67,10 @@ body {
 }
 
 #input {
-    text-align: right;    
+    text-align: right;
+    padding: 1rem;    
     margin: auto 0;
     font-size: 2rem;
+    word-wrap: break-word;
+    max-width: 360px;
 }
